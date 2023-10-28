@@ -11,6 +11,7 @@ class InternetBloc extends Bloc<InternetEvent, InternetState> {
   StreamSubscription? _connectivitySubscription;
 
   InternetBloc() : super(InternetInitial()) {
+    
     on<InternetEvent>((event, emit) {
       if (event is InternetConnectedEvent) {
         emit(InternetConnectedState(message: 'Connected'));
@@ -18,8 +19,6 @@ class InternetBloc extends Bloc<InternetEvent, InternetState> {
       } else if (event is InternetNotConnectedEvent) {
         emit(InternetNotConnectedState(message: 'Not Connected'));
       }
-      
-
     }); 
 
     _connectivitySubscription = Connectivity().onConnectivityChanged.listen((event) {
